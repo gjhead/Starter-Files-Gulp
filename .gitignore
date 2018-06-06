@@ -34,5 +34,6 @@ Thumbs.db
 node_modules
 config.codekit
 
-// Ignore my build directory
+# Ignore my build directory
+
 build
