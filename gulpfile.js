@@ -11,7 +11,6 @@ var uglify = require('gulp-uglify');
 var postcss = require('gulp-postcss');
 var autoprefixer = require('gulp-autoprefixer');
 var concat = require('gulp-concat');
-var notify = require('gulp-notify');
 var rename = require('gulp-rename');
 var sourcemaps = require('gulp-sourcemaps');
 
@@ -21,7 +20,6 @@ gulp.task('lint', function() {
     return gulp.src('./a/js/script.js')
         .pipe(jshint())
         .pipe(jshint.reporter('fail'))
-        .pipe(notify('JS Linting Successful'));
 });
 
 
@@ -37,7 +35,6 @@ gulp.task('scripts', function() {
         .pipe(rename('scripts.min.js'))
         .pipe(uglify())
         .pipe(gulp.dest('./build/js'))
-        .pipe(notify('JS done!'));
 });
 
 
@@ -52,8 +49,6 @@ gulp.task('styles', function() {
         .pipe(sourcemaps.write('.'))
         .pipe(gulp.dest('./build/css'))
 		.pipe(rename({suffix: '.min'}))
-		.pipe(notify('Styles done!'));
-
 });
 
 
@@ -62,7 +57,6 @@ gulp.task('html', function() {
   return gulp.src('./a/kit/**/*.kit')
     .pipe(kit())
     .pipe(gulp.dest('./build/'))
-    .pipe(notify('Kit done!'));
 });
 
 
