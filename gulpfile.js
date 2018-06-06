@@ -20,7 +20,7 @@ var sourcemaps = require('gulp-sourcemaps');
 gulp.task('lint', function() {
     return gulp.src('./a/js/script.js')
         .pipe(jshint())
-        .pipe(jshint.reporter('default'))
+        .pipe(jshint.reporter('fail'))
         .pipe(notify('JS Linting Successful'));
 });
 
@@ -43,14 +43,17 @@ gulp.task('scripts', function() {
 
 // Compile CSS
 gulp.task('styles', function() {
-  return sass('./a/sass/screen.scss', { style: 'expanded' }) // compact, compressed, nested or expanded
-    .pipe(sourcemaps.init())
-    .pipe(sass().on('error', sass.logError))
-    .pipe(autoprefixer('last 2 version'))
-    .pipe(sourcemaps.write('./build/css/maps'))
-    .pipe(gulp.dest('./build/css'))
-    .pipe(rename({suffix: '.min'}))
-    .pipe(notify('Styles done!'));
+	
+	return gulp.src('./a/sass/screen.scss')
+        .pipe(sourcemaps.init())
+        .pipe(sass().on('error', sass.logError))
+        .pipe(autoprefixer('last 2 version'))
+        .pipe(sass({outputStyle: 'expanded'}))// compact, compressed, nested or expanded
+        .pipe(sourcemaps.write('.'))
+        .pipe(gulp.dest('./build/css'))
+		.pipe(rename({suffix: '.min'}))
+		.pipe(notify('Styles done!'));
+
 });
 
 
@@ -65,7 +68,7 @@ gulp.task('html', function() {
 
 
 // Watch Task
-gulp.task('watch', function(){
+gulp.task('watch', ['lint', 'scripts', 'styles', 'html'], function(){
   gulp.watch('./a/kit/**/*.kit', ['html']);
   gulp.watch('./a/js/script.js', ['lint']);
   gulp.watch('./a/js/**/*.js', ['scripts']);
