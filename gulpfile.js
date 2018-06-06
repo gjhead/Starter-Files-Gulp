@@ -91,4 +91,4 @@ gulp.task('watch', ['lint', 'scripts', 'styles', 'html'], function(){
 
 
 // Default Task
-gulp.task('default', ['lint', 'scripts', 'styles', 'html', 'watch']);
+gulp.task('default', ['lint', 'scripts', 'styles', 'html', 'copy', 'watch']);
