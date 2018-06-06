@@ -13,6 +13,7 @@ var autoprefixer = require('gulp-autoprefixer');
 var concat = require('gulp-concat');
 var rename = require('gulp-rename');
 var sourcemaps = require('gulp-sourcemaps');
+var livereload = require('gulp-livereload');
 
 
 // Lint my custom js file
@@ -63,10 +64,13 @@ gulp.task('html', function() {
 
 // Watch Task
 gulp.task('watch', ['lint', 'scripts', 'styles', 'html'], function(){
-  gulp.watch('./a/kit/**/*.kit', ['html']);
-  gulp.watch('./a/js/script.js', ['lint']);
-  gulp.watch('./a/js/**/*.js', ['scripts']);
-  gulp.watch('./a/sass/**/*.scss', ['styles']);
+	
+	livereload.listen();
+	
+	gulp.watch('./a/kit/**/*.kit', ['html']).on('change', livereload.changed);;
+	gulp.watch('./a/js/script.js', ['lint']).on('change', livereload.changed);;
+	gulp.watch('./a/js/**/*.js', ['scripts']).on('change', livereload.changed);;
+	gulp.watch('./a/sass/**/*.scss', ['styles']).on('change', livereload.changed);;
 });
 
 
