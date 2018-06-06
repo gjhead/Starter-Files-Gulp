@@ -33,3 +33,6 @@ Thumbs.db
 .tmproj
 node_modules
 config.codekit
+
+// Ignore my build directory
+build
