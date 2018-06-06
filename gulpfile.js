@@ -62,16 +62,30 @@ gulp.task('html', function() {
 });
 
 
+// Copy Static Assets 
+gulp.task('copy', function(){
+  gulp.src([
+    './static/**'
+  ])
+  .pipe(gulp.dest('./build/assets/'));
+
+  gulp.src([
+    './basedir/**'
+  ])
+  .pipe(gulp.dest('./build/'));  
+});
+
 
 // Watch Task
 gulp.task('watch', ['lint', 'scripts', 'styles', 'html'], function(){
 	
 	livereload.listen();
 	
-	gulp.watch('./a/kit/**/*.kit', ['html']).on('change', livereload.changed);;
-	gulp.watch('./a/js/script.js', ['lint']).on('change', livereload.changed);;
-	gulp.watch('./a/js/**/*.js', ['scripts']).on('change', livereload.changed);;
-	gulp.watch('./a/sass/**/*.scss', ['styles']).on('change', livereload.changed);;
+	gulp.watch('./a/kit/**/*.kit', ['html']).on('change', livereload.changed);
+	gulp.watch('./a/js/script.js', ['lint']).on('change', livereload.changed);
+	gulp.watch('./a/js/**/*.js', ['scripts']).on('change', livereload.changed);
+	gulp.watch('./a/sass/**/*.scss', ['styles']).on('change', livereload.changed);
+	gulp.watch(['./static/**', './basedir/**'], ['copy']).on('change', livereload.changed);
 });
 
 
