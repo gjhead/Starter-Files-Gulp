@@ -10252,5 +10252,5 @@ function example() {
 
 /* On Document Ready */
 $(document).ready(function() {	
-	example();   
+	example()
 });

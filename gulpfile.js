@@ -5,6 +5,7 @@ var gulp = require('gulp');
 // Include any plugins
 
 var jshint = require('gulp-jshint');
+var stylish = require('jshint-stylish');
 var kit = require('gulp-kit');
 var sass = require('gulp-sass');
 var uglify = require('gulp-uglify');
@@ -20,7 +21,7 @@ var livereload = require('gulp-livereload');
 gulp.task('lint', function() {
     return gulp.src('./a/js/script.js')
         .pipe(jshint())
-        .pipe(jshint.reporter('fail'))
+        .pipe(jshint.reporter(stylish))
 });
 
 
