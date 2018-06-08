@@ -45,12 +45,15 @@ gulp.task('styles', function() {
 	
 	return gulp.src('./a/sass/screen.scss')
         .pipe(sourcemaps.init())
-        .pipe(sass().on('error', sass.logError))
+        
+        .pipe(sass({
+	        outputStyle: 'expanded' // compact, compressed, nested or expanded	
+	    }).on('error', sass.logError))
+        
         .pipe(autoprefixer('last 2 version'))
-        .pipe(sass({outputStyle: 'expanded'}))// compact, compressed, nested or expanded
+
         .pipe(sourcemaps.write('.'))
         .pipe(gulp.dest('./build/css'))
-		.pipe(rename({suffix: '.min'}))
 });
 
 
